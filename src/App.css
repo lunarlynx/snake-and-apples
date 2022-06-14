@@ -1,0 +1,29 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  background: #081a1a;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+body {
+  display: grid;
+  height: 100vh;
+  align-content: center;
+  justify-content: center;
+}
+
+#root, .App, .container {
+  height: 100%;
+}
+
+.App {
+  display: grid;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(10, 2rem);
+  grid-template-rows: repeat(10, 2rem);
+  grid-gap: .08rem;
+}
