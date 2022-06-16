@@ -1,77 +1,69 @@
-const Snake = () => {
+import React from 'react';
 
-    // удаление куска хвоста, после появления яблок не понадобится
-    function moveArrayToLeft(array) {
-        return array.slice(0, -1);
+// удаление куска хвоста, после появления яблок не понадобится
+export class Scaly {
+  // чтобы создать новую змею, нужны ее координаты
+  constructor(array) {
+    this.coordinates = [...array];
+  }
+
+  direction(event, limit) {
+    if (event.code === 'ArrowDown') {
+      if ((this.coordinates[0][0] + 1 === this.coordinates[1][0]) || this.coordinates[0][0] + 1 >= limit) {
+        console.log('Там либо хвост, либо стена!');
+      } else {
+        return this.moving(this.coordinates[0][0] + 1, this.coordinates[0][1]);
+      }
     }
-
-    // для проверки пограничных клеток
-    function getValue(arr, i, j) {
-        let arrElement = arr[i] ?? [];
-        return arrElement[j];
+    if (event.code === 'ArrowUp') {
+      if ((this.coordinates[0][0] - 1 === this.coordinates[1][0]) || this.coordinates[0][0] - 1 < 0) {
+        console.log('Там либо хвост, либо стена!');
+      } else {
+        return this.moving(this.coordinates[0][0] - 1, this.coordinates[0][1]);
+      }
     }
-
-    class Scaly {
-        // чтобы создать новую змею, нужны ее текущие координаты
-        constructor(array) {
-            this.coordinates = [...array];
-        }
-
-        // метод для движения змеи на одну клеточку, нужны новые координаты головы
-        moving(obj, x, y) {
-            let newArray = moveArrayToLeft(obj.coordinates);
-            newArray.unshift([x, y]);
-            obj.coordinates = newArray;
-            return obj;
-        }
+    if (event.code === 'ArrowLeft') {
+      if ((this.coordinates[0][1] - 1 === this.coordinates[1][1]) || this.coordinates[0][1] - 1 < 0) {
+        console.log('Там либо хвост, либо стена!');
+      } else {
+        return this.moving(this.coordinates[0][0], this.coordinates[0][1] - 1);
+      }
     }
-
-    // начальная змея
-    let snake = new Scaly([[0, 2], [0, 1], [0, 0]]);
-
-    // обработка нажатия клавиш
-    function letGoLittleSnake(obj, limit) {
-        let movingSnake = obj;
-        // стрелка вниз
-        document.addEventListener('keydown', function (event) {
-            if (event.code === 'ArrowDown') {
-                if ((obj.coordinates[0][0] + 1 === obj.coordinates[1][0]) || obj.coordinates[0][0] + 1 >= limit) {
-                    console.log('Там либо хвост, либо стена!')
-                } else {
-                    movingSnake = obj.moving(obj, obj.coordinates[0][0] + 1, obj.coordinates[0][1]);
-                    console.log(movingSnake)
-                }
-            }
-            if (event.code === 'ArrowUp') {
-                if ((obj.coordinates[0][0] - 1 === obj.coordinates[1][0]) || obj.coordinates[0][0] - 1 < 0) {
-                    console.log('Там либо хвост, либо стена!')
-                } else {
-                    movingSnake = obj.moving(obj, obj.coordinates[0][0] - 1, obj.coordinates[0][1]);
-                    console.log(movingSnake)
-                }
-            }
-            if (event.code === 'ArrowLeft') {
-                if ((obj.coordinates[0][1] - 1 === obj.coordinates[1][1]) || obj.coordinates[0][1] - 1 < 0) {
-                    console.log('Там либо хвост, либо стена!')
-                } else {
-                    movingSnake = obj.moving(obj, obj.coordinates[0][0], obj.coordinates[0][1] - 1);
-                    console.log(movingSnake)
-                }
-            }
-            if (event.code === 'ArrowRight') {
-                if ((obj.coordinates[0][1] + 1 === obj.coordinates[1][1]) || obj.coordinates[0][1] + 1 >= limit) {
-                    console.log('Там либо хвост, либо стена!')
-                } else {
-                    movingSnake = obj.moving(obj, obj.coordinates[0][0], obj.coordinates[0][1] + 1);
-                    console.log(movingSnake)
-                }
-            }
-        });
-        return movingSnake;
+    if (event.code === 'ArrowRight') {
+      if ((this.coordinates[0][1] + 1 === this.coordinates[1][1]) || this.coordinates[0][1] + 1 >= limit) {
+        console.log('Там либо хвост, либо стена!');
+      } else {
+        return this.moving(this.coordinates[0][0], this.coordinates[0][1] + 1);
+      }
     }
+    return this;
+  }
 
-    console.log(snake);
-    letGoLittleSnake(snake, 10);
+  // метод для движения змеи на одну клеточку, нужны новые координаты головы
+  moving(x, y) {
+    const newArray = [[x, y]];
+    const l = this.coordinates.length;
+    for (let i = 0; i < l - 1; i++) {
+      newArray.push(this.coordinates[i]);
+    }
+    return new Scaly(newArray);
+  }
+
+  isHead(x, y) {
+    const [headX, headY] = this.coordinates[0];
+    return headX === x && headY === y;
+  }
+
+  isTail(x, y) {
+    for (let i = 1; i < this.coordinates.length; i++) {
+      const [tailX, tailY] = this.coordinates[i];
+      if (tailX === x && tailY === y) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
-export default Snake;
+// начальная змея
+export const startSnake = new Scaly([[0, 2], [0, 1], [0, 0]]);

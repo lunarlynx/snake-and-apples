@@ -1,14 +1,14 @@
 import './App.css';
-import Snake from './Snake/Snake';
+import Field from './Field/Field';
 
 function App() {
-    return (
-        <div className="App">
-            <div className="container">
-                <Snake/>
-            </div>
-        </div>
-    );
+  return (
+    <div className="App">
+      <div className="container">
+        <Field/>
+      </div>
+    </div>
+  );
 }
 
 export default App;
