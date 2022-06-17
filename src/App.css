@@ -19,6 +19,16 @@ body {
 
 .App {
   display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-content: center;
+  font-size: 2rem;
+  color: #fff;
+}
+
+.App > div {
+  align-self: center;
+  justify-self: center;
 }
 
 .container {

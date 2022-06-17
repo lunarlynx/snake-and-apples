@@ -9,28 +9,28 @@ export class Scaly {
 
   direction(event, limit) {
     if (event.code === 'ArrowDown') {
-      if ((this.coordinates[0][0] + 1 === this.coordinates[1][0]) || this.coordinates[0][0] + 1 >= limit) {
+      if (this.coordinates[0][0] + 1 >= limit || this.isTail(this.coordinates[0][0] + 1, this.coordinates[0][1])) {
         console.log('Там либо хвост, либо стена!');
       } else {
         return this.moving(this.coordinates[0][0] + 1, this.coordinates[0][1]);
       }
     }
     if (event.code === 'ArrowUp') {
-      if ((this.coordinates[0][0] - 1 === this.coordinates[1][0]) || this.coordinates[0][0] - 1 < 0) {
+      if (this.coordinates[0][0] - 1 < 0 || this.isTail(this.coordinates[0][0] - 1, this.coordinates[0][1])) {
         console.log('Там либо хвост, либо стена!');
       } else {
         return this.moving(this.coordinates[0][0] - 1, this.coordinates[0][1]);
       }
     }
     if (event.code === 'ArrowLeft') {
-      if ((this.coordinates[0][1] - 1 === this.coordinates[1][1]) || this.coordinates[0][1] - 1 < 0) {
+      if (this.coordinates[0][1] - 1 < 0 || this.isTail(this.coordinates[0][0], this.coordinates[0][1] - 1)) {
         console.log('Там либо хвост, либо стена!');
       } else {
         return this.moving(this.coordinates[0][0], this.coordinates[0][1] - 1);
       }
     }
     if (event.code === 'ArrowRight') {
-      if ((this.coordinates[0][1] + 1 === this.coordinates[1][1]) || this.coordinates[0][1] + 1 >= limit) {
+      if (this.coordinates[0][1] + 1 >= limit || this.isTail(this.coordinates[0][0], this.coordinates[0][1] + 1)) {
         console.log('Там либо хвост, либо стена!');
       } else {
         return this.moving(this.coordinates[0][0], this.coordinates[0][1] + 1);
@@ -43,7 +43,17 @@ export class Scaly {
   moving(x, y) {
     const newArray = [[x, y]];
     const l = this.coordinates.length;
-    for (let i = 0; i < l - 1; i++) {
+    for (let i = 0; i < l-1; i++) {
+      newArray.push(this.coordinates[i]);
+    }
+    return new Scaly(newArray);
+  }
+
+  // метод для роста змейки
+  eating(x, y) {
+    const newArray = [[x, y]];
+    const l = this.coordinates.length;
+    for (let i = 0; i < l; i++) {
       newArray.push(this.coordinates[i]);
     }
     return new Scaly(newArray);
