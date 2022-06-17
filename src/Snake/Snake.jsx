@@ -7,10 +7,16 @@ export class Scaly {
     this.coordinates = [...array];
   }
 
+  // самостоятельное движение змеи вперед
+  selfCrawling() {
+
+  }
+
   direction(event, limit) {
     if (event.code === 'ArrowDown') {
       if (this.coordinates[0][0] + 1 >= limit || this.isTail(this.coordinates[0][0] + 1, this.coordinates[0][1])) {
         console.log('Там либо хвост, либо стена!');
+        return undefined;
       } else {
         return this.moving(this.coordinates[0][0] + 1, this.coordinates[0][1]);
       }
@@ -18,6 +24,7 @@ export class Scaly {
     if (event.code === 'ArrowUp') {
       if (this.coordinates[0][0] - 1 < 0 || this.isTail(this.coordinates[0][0] - 1, this.coordinates[0][1])) {
         console.log('Там либо хвост, либо стена!');
+        return undefined;
       } else {
         return this.moving(this.coordinates[0][0] - 1, this.coordinates[0][1]);
       }
@@ -25,6 +32,7 @@ export class Scaly {
     if (event.code === 'ArrowLeft') {
       if (this.coordinates[0][1] - 1 < 0 || this.isTail(this.coordinates[0][0], this.coordinates[0][1] - 1)) {
         console.log('Там либо хвост, либо стена!');
+        return undefined;
       } else {
         return this.moving(this.coordinates[0][0], this.coordinates[0][1] - 1);
       }
@@ -32,6 +40,7 @@ export class Scaly {
     if (event.code === 'ArrowRight') {
       if (this.coordinates[0][1] + 1 >= limit || this.isTail(this.coordinates[0][0], this.coordinates[0][1] + 1)) {
         console.log('Там либо хвост, либо стена!');
+        return undefined;
       } else {
         return this.moving(this.coordinates[0][0], this.coordinates[0][1] + 1);
       }
