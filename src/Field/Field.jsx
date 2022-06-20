@@ -10,7 +10,17 @@ const Field = (props) => {
   const [stateOfApple, setStateOfApple] = React.useState(startApple);
   const [isOver, setIsOver] = React.useState(false);
 
+
   useEffect(() => {
+    let interval = setInterval(() => {
+      let newCrawState = stateOfSnake.directionWithPath(stateOfSnake.path, fieldSize);
+      if (newCrawState === undefined) {
+        setIsOver(true);
+      } else {
+        setStateOfSnake(newCrawState);
+      }
+    }, 200);
+
     let listener = (event) => {
       let newStateOfSnake = stateOfSnake.direction(event, fieldSize);
       if (newStateOfSnake === undefined) {
@@ -29,6 +39,7 @@ const Field = (props) => {
     }
 
     return () => {
+      clearInterval(interval);
       document.removeEventListener('keydown', listener);
     };
   });

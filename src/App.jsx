@@ -24,7 +24,12 @@ function App() {
       }}>
         <Field updateData={updateData} />
       </div>
-      <div className="info">some info</div>
+      <div className="controls">
+        <button type="button">Up</button>
+        <button type="button">Right</button>
+        <button type="button">Down</button>
+        <button type="button">Left</button>
+      </div>
     </div>
   );
 }
