@@ -1,0 +1,6 @@
+.controls {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 3fr 3fr 3fr;
+    grid-template-rows: 3fr 3fr 3fr;
+}

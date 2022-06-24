@@ -1,1 +1,1 @@
-export const fieldSize = 10;
+export const fieldSize = 20;

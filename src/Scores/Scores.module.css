@@ -1,0 +1,8 @@
+.scores {
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .3), 0 1px 0 #fff;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .4);
+    background: #f5f6f8;
+    padding: 1rem 2rem;
+    color: #333;
+    min-width: 30%;
+}

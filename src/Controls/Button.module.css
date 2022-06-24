@@ -1,0 +1,75 @@
+button {
+    width: 5rem;
+    height: 5rem;
+    border: 0;
+    outline: 0;
+    border-radius: 3px;
+    background: #e0e5ec;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: -7px -7px 20px 0 #fff9,
+    -4px -4px 5px 0 #fff9,
+    7px 7px 20px 0 #0002,
+    4px 4px 5px 0 #0001;
+    transition: box-shadow 0.6s cubic-bezier(.79, .21, .06, .81);
+    font-size: 26px;
+    color: #666;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: radial-gradient(circle, #0ff 0%, #e0e5ec 60%);
+    color: rgba(102, 102, 102, .5);
+    animation: colorChange 3s linear infinite;
+}
+
+button:active {
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .5),
+    -4px -4px 6px 0 rgba(116, 125, 136, .2),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, .5),
+    inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+}
+
+button:disabled {
+    cursor: not-allowed;
+    color: #b9b9b9;
+    animation: none;
+}
+
+button:disabled:hover {
+    background: #e0e5ec;
+}
+
+@keyframes colorChange {
+    to {
+        filter: hue-rotate(360deg);
+    }
+}
+
+#up {
+    grid-column: 2/3;
+}
+
+#left {
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+
+#right {
+    grid-column: 3/4;
+    grid-row: 2/3;
+}
+
+#down {
+    grid-column: 2/3;
+    grid-row: 3/4;
+}
+
+@media screen and (max-width: 700px) {
+    button {
+        height: 4rem;
+    }
+}
