@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import Field from './Field/Field';
 import { fieldSize } from './Field/Setup';
 import Controls from './Controls/Controls';
 import { startSnake } from './Snake/Snake';
@@ -30,6 +29,7 @@ function App() {
   // движение и управление змеей
   useEffect(() => {
 
+    // самостоятельное движение змеи
     let interval = setInterval(() => {
       let newCrawState = stateOfSnake.directionWithPath(stateOfSnake.path, fieldSize);
       if (newCrawState === undefined) {
@@ -39,6 +39,7 @@ function App() {
       }
     }, 1000);
 
+    // отслеживание нажатия кнопок на клавиатуре
     let listener = (event) => {
       let newStateOfSnake = stateOfSnake.direction(event, fieldSize);
       if (newStateOfSnake === undefined) {
@@ -49,6 +50,7 @@ function App() {
     };
     document.addEventListener('keydown', listener);
 
+    // отслеживание столкновения змеи с яблоком
     if ((stateOfSnake.coordinates[0][0] === stateOfApple.coordinates[0]) && (stateOfSnake.coordinates[0][1] === stateOfApple.coordinates[1])) {
       const newSnakeState = stateOfSnake.eating(stateOfApple.coordinates[0], stateOfApple.coordinates[1]);
       updateData();
