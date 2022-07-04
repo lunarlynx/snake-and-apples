@@ -1,8 +1,17 @@
-.scores {
+.scores, .level {
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, .3), 0 1px 0 #fff;
     text-shadow: 0 1px 0 rgba(255, 255, 255, .4);
     background: #f5f6f8;
     padding: 1rem 2rem;
     color: #333;
-    min-width: 30%;
+    width: 30%;
+    min-width: 9rem;
+}
+
+@media screen and (max-width: 700px) {
+    .info {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
 }

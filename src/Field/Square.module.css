@@ -1,15 +1,19 @@
+.item, .snaked, .head, .apple {
+    transition: .3s ease;
+}
+
 .item {
-  background: #abbaba;
+    background: #abbaba;
 }
 
 .snaked {
-  background: #403636;
+    background: #403636;
 }
 
 .head {
-  background: #286666;
+    background: #286666;
 }
 
 .apple {
-  background: #a14545;
+    background: #a14545;
 }
