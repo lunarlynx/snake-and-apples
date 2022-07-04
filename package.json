@@ -1,5 +1,6 @@
 {
   "name": "snake-and-apples",
+  "homepage": "./",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
